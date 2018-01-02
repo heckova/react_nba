@@ -1,7 +1,7 @@
 import React, {Component} from "react";
 import {Link} from "react-router-dom";
 // import {Transition} from 'react-transition-group/Transition';
-import { CSSTransitionGroup } from 'react-transition-group';
+import {CSSTransitionGroup} from 'react-transition-group';
 
 const URL_TEAMS = "http://localhost:3004/teams";
 const fadeAnimation = {
@@ -16,6 +16,25 @@ const fadeAnimation = {
 
 class Teams extends Component {
 
+
+    searchTeam = (event) => {
+        const keyword = event.target.value;
+        if (keyword !== "") {
+            const list = this.state.teams.filter((item) => {
+                return item.name.toLowerCase().indexOf(keyword.toLowerCase()) >
+                    -1
+            });
+            this.setState({
+                filtered: list,
+                keyword: event.target.value
+            })
+        } else {
+            this.setState({
+                filtered: this.state.teams,
+                keyword: keyword
+            })
+        }
+    };
 
     renderList = ({filtered}) => {
         return filtered.map((item) => {
@@ -53,8 +72,10 @@ class Teams extends Component {
             <div className="teams_component">
                 <div className="teams_input">
                     <input
+                        value={this.state.keyword}
                         type="text"
                         placeholder="Search for a Team"
+                        onChange={e => this.searchTeam(e)}
                     />
                 </div>
                 <div className="teams_container">
