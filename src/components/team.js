@@ -22,6 +22,28 @@ class Team extends Component {
             )
         })
     };
+    renderSquad = (squad) => {
+        return squad.map((item) => {
+            return (
+                <div key={item.name} className="item .player_wrapper">
+                    <img alt={item.name} src={`/images/avatar.png`}/>
+                    <h4>{item.name}</h4>
+                    <div className="node">
+                        <span>Number:</span>{item.number}
+                    </div>
+                    <div className="node">
+                        <span>PPG:</span>{item.PPG}
+                    </div>
+                    <div className="node">
+                        <span>APG:</span>{item.APG}
+                    </div>
+                    <div className="node">
+                        <span>RPG:</span>{item.RPG}
+                    </div>
+                </div>
+            )
+        })
+    };
 
     constructor(props) {
         super(props);
